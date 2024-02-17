@@ -16,7 +16,7 @@ class BaseContact:
 
     def contact(self):
         print()
-        print("------------------------------")
+        print("-----------Wizytówka normalna-----------")
         print(f"Wybieram numer {self.phone_number} i dzwonie do {self.name} {self.surname}")
         print("------------------------------")
 
@@ -26,15 +26,15 @@ class BaseContact:
 
 
 class BusinessContact(BaseContact):
-    def __init__(self, name, surname, phone_number, email, position, company_name, company_phone):
-        super().__init__(name, surname, phone_number, email)
+    def __init__(self, position, company_name, company_phone, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.position = position
         self.company_name = company_name
         self.company_phone = company_phone
 
     def contact(self):
         print()
-        print("------------------------------")
+        print("-----------Wizytówka biznesowa-----------")
         print(f"Wybieram numer {self.company_phone} i dzwonie do {self.name} {self.surname}")
         print("------------------------------")
 
@@ -60,7 +60,9 @@ def main():
     card_type = input("Wpisz rodzaj wizytowki: 1- Biznesowa, 2- Normalna: ")
     amount = input("Wpisz ilosc wizytowek jaka chcesz wygenerowac: ")
     contacts = create_contacts(card_type, amount)
-    print(contacts)
+    
+    for contact in contacts:
+        contact.contact()
 
 if __name__ == '__main__':
     main()
